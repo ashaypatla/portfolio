@@ -1,16 +1,16 @@
 
-Short 1–2 sentence summary about who you are and what you’re focused on.
+Aspiring data engineer currently pursuing a Master's in Data Science at Drexel University, with experience in building data pipelines and predictive models to solve real-world problems. Passionate about applying machine learning and data visualizations to uncover insights and make data-driven decisions.
 
 ---
 
 ## Education
-- **Degree** — School Name (Year)
-  - Relevant coursework:
-  - Honors / GPA (optional)
+- **Degree** — Drexel University: College of Computing and Informatics (2025 - 2027)
+  - Relevant coursework: Data Acquisition & Pre-Processing, Data Analysis & Interpretation, Applied Artificial Intelligence, Quantitative Foundations of Data Science
+  - GPA: 4.0
 
-- **Degree** — School Name (Year)
-  - Relevant coursework:
-  - Certifications (optional)
+- **Degree** — Rutgers University: New Brunswick (2020 - 2024)
+  - Relevant coursework: Business Data Management, Business Decision Analysis Under Uncertainty, Investment Modeling in R, Time Series Modeling for Business, A.I. in Marketing 
+  - GPA: 3.837
 
 ---
 
