@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Engineer — Personal Bio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0b0c0f;
+      --surface: #13151a;
+      --border: #1f2229;
+      --accent: #00e5c0;
+      --accent2: #5b5fef;
+      --text: #e8eaf0;
+      --muted: #6b7080;
+      --grid: rgba(255,255,255,0.025);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Radial glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: -10%;
+      width: 70vw;
+      height: 70vw;
+      background: radial-gradient(circle, rgba(0,229,192,0.06) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+    }
+
+    /* ── Header ── */
+    header {
+      margin-bottom: 80px;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.1s forwards;
+    }
+
+    .label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-top: 18px;
+    }
+
+    /* ── Bio Card ── */
+    .bio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 48px;
+      margin-bottom: 48px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.3s forwards;
+    }
+
+    .bio-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    }
+
+    .bio-card p {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.05rem, 2.2vw, 1.22rem);
+      line-height: 1.85;
+      color: #c8cad6;
+      font-weight: 400;
+    }
+
+    .bio-card p + p {
+      margin-top: 1.2em;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── Tags ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 56px;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.45s forwards;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .tag:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── Stats Row ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 56px;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.55s forwards;
+    }
+
+    .stat {
+      background: var(--surface);
+      padding: 28px 32px;
+      transition: background 0.2s;
+    }
+
+    .stat:hover { background: #181b22; }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Focus Areas ── */
+    .section-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.65s forwards;
+    }
+
+    .focus-item {
+      border: 1px solid var(--border);
+      padding: 24px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+
+    .focus-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,229,192,0.04), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .focus-item:hover { border-color: rgba(0,229,192,0.3); }
+    .focus-item:hover::after { opacity: 1; }
+
+    .focus-icon {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .focus-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .focus-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.8s forwards;
+    }
+
+    .footer-text {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    @media (max-width: 600px) {
+      .focus-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .bio-card { padding: 32px 24px; }
+      .container { padding: 60px 20px 80px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="label">About Me</div>
+      <h1>Data <em>Engineer</em><br>& Researcher</h1>
+      <p class="subtitle">Drexel University · M.S. Data Science · Philadelphia, PA</p>
+    </header>
+
+    <div class="bio-card">
+      <p>
+        I'm an aspiring <span class="highlight">data engineer</span> currently pursuing my Master's in Data Science at Drexel University. I build production-grade <span class="highlight">data pipelines</span> and train <span class="highlight">predictive models</span> that transform raw, messy data into reliable infrastructure for decision-making.
+      </p>
+      <p>
+        My work sits at the intersection of engineering and analysis — I care deeply about both how data flows through a system and what it ultimately reveals. From pipeline architecture to machine learning experiments, I'm passionate about the full journey from raw data to real-world impact.
+      </p>
+      <p>
+        When I'm not engineering data systems, I'm exploring ways to make complex datasets speak clearly through <span class="highlight">visualization</span> — turning numbers into narratives that drive smarter, faster decisions.
+      </p>
+    </div>
+
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">SQL</span>
+      <span class="tag">Apache Spark</span>
+      <span class="tag">ETL Pipelines</span>
+      <span class="tag">Machine Learning</span>
+      <span class="tag">Data Visualization</span>
+      <span class="tag">Cloud Infrastructure</span>
+      <span class="tag">Predictive Modeling</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num">M.S.</span>
+        <span class="stat-label">Data Science · Drexel</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Pipelines Built</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">01</span>
+        <span class="stat-label">Goal: Production-Scale Impact</span>
+      </div>
+    </div>
+
+    <div class="section-title">Focus Areas</div>
+    <div class="focus-grid">
+      <div class="focus-item">
+        <span class="focus-icon">⚙️</span>
+        <div class="focus-name">Data Pipeline Engineering</div>
+        <div class="focus-desc">Designing scalable, fault-tolerant ETL/ELT systems that move and transform data reliably at scale.</div>
+      </div>
+      <div class="focus-item">
+        <span class="focus-icon">🤖</span>
+        <div class="focus-name">Predictive Modeling</div>
+        <div class="focus-desc">Building ML models that solve tangible problems — from forecasting to classification and beyond.</div>
+      </div>
+      <div class="focus-item">
+        <span class="focus-icon">📊</span>
+        <div class="focus-name">Data Visualization</div>
+        <div class="focus-desc">Crafting clear, compelling visual narratives that make complex datasets accessible and actionable.</div>
+      </div>
+      <div class="focus-item">
+        <span class="focus-icon">🔬</span>
+        <div class="focus-name">Applied Research</div>
+        <div class="focus-desc">Applying data science methods to real-world challenges, bridging academic rigor with practical outcomes.</div>
+      </div>
+    </div>
+
+    <footer>
+      <span class="footer-text">Open to opportunities · Data Engineering · ML Engineering</span>
+      <div class="footer-dot"></div>
+    </footer>
+
+  </div>
+</body>
+</html>
