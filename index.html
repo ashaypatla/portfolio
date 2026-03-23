@@ -218,6 +218,44 @@
       color: var(--muted);
     }
 
+    /* ── Repo Link ── */
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 2px;
+      transition: color 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .repo-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,229,192,0.06), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .repo-link:hover { color: var(--accent); border-color: rgba(0,229,192,0.4); }
+    .repo-link:hover::before { opacity: 1; }
+
+    .repo-link svg {
+      width: 12px; height: 12px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
     /* ── Focus Areas ── */
     .section-title {
       font-family: 'DM Mono', monospace;
@@ -620,9 +658,9 @@
   <div class="nav-logo">Ashay <em>Patla</em></div>
   <ul class="nav-links">
     <li><button class="nav-btn active" id="btn-about" onclick="showPage('about')">About</button></li>
-    <li><button class="nav-btn" id="btn-experience" onclick="showPage('experience')">💼 Work Experience</button></li>
-    <li><button class="nav-btn" id="btn-projects" onclick="showPage('projects')">🛠️ Projects</button></li>
-    <li><button class="nav-btn" id="btn-education" onclick="showPage('education')">🎓 Education</button></li>
+    <li><button class="nav-btn" id="btn-experience" onclick="showPage('experience')">Work Experience</button></li>
+    <li><button class="nav-btn" id="btn-projects" onclick="showPage('projects')">Projects</button></li>
+    <li><button class="nav-btn" id="btn-education" onclick="showPage('education')">Education</button></li>
   </ul>
 </nav>
 
@@ -633,7 +671,7 @@
     <header>
       <div class="label">About Me</div>
       <h1>Ashay <em>Patla</em></h1>
-      <p class="subtitle">Data Engineer & Analyst · Drexel University · M.S. Data Science · Philadelphia, PA</p>
+      <p class="subtitle">Data Engineer/Analyst · Drexel University · M.S. Data Science · Philadelphia, PA</p>
     </header>
 
     <div class="bio-card">
@@ -674,17 +712,14 @@
     <div class="section-title">Focus Areas</div>
     <div class="focus-grid">
       <div class="focus-item">
-        <span class="focus-icon">⚙️</span>
         <div class="focus-name">Data Pipeline Engineering</div>
         <div class="focus-desc">Designing scalable, fault-tolerant ETL/ELT systems that move and transform data reliably at scale.</div>
       </div>
       <div class="focus-item">
-        <span class="focus-icon">🤖</span>
         <div class="focus-name">Predictive Modeling</div>
         <div class="focus-desc">Building ML models that solve tangible problems — from forecasting to classification and beyond.</div>
       </div>
       <div class="focus-item">
-        <span class="focus-icon">📊</span>
         <div class="focus-name">Data Visualization</div>
         <div class="focus-desc">Building dashboards and visual tools that turn raw numbers into insights stakeholders can act on.</div>
       </div>
