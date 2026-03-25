@@ -118,7 +118,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 2px;
-      padding: 48px;
+      padding: 20px 24px;
       margin-bottom: 40px;
       position: relative;
       opacity: 0;
@@ -133,10 +133,11 @@
       background: linear-gradient(to bottom, var(--accent), var(--accent2));
     }
     .bio-card p {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.05rem, 2.2vw, 1.22rem);
-      line-height: 1.85;
-      color: #4a3f35;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+      color: var(--muted);
       font-weight: 400;
     }
 
@@ -562,7 +563,7 @@
       <button class="back-btn" onclick="showPage('home')">← Back</button>
       <header>
         <div class="label">Work</div>
-        <h1>Technical <em>Projects</em></h1>
+        <h1>Featured <em>Projects</em></h1>
       </header>
       <div class="projects-grid">
         <div class="project-card">
