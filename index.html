@@ -369,7 +369,27 @@
     .project-card:nth-child(3) { animation-delay: 0.3s; }
     .project-card:nth-child(4) { animation-delay: 0.4s; }
     .project-card:hover { border-color: rgba(232,97,10,0.35); }
-    .project-tag { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .project-tag {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .in-progress-badge {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 2px 7px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
     .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 10px; }
     .project-desc { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
     .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -563,6 +583,26 @@
         <h1>Featured <em>Projects</em></h1>
       </header>
       <div class="projects-grid">
+
+        <!-- Customer Clustering — NEW -->
+        <div class="project-card">
+          <div class="project-tag">
+            Machine Learning · Cloud · Marketing Analytics
+          </div>
+          <div class="project-title">Customer Segmentation & RFM Clustering Pipeline</div>
+          <div class="project-desc">Building an end-to-end customer segmentation system on 541K+ real retail transactions from the UCI Online Retail Dataset. Raw data flows from AWS S3 through a Glue ETL pipeline into SageMaker, where RFM features (recency, frequency, monetary value, and average order value) are engineered per customer and fed into a K-Means model. Cluster count is selected through the elbow method and silhouette scoring, producing labeled customer segments for marketing targeting.</div>
+          <div class="project-stack">
+            <span class="stack-pill">Python</span>
+            <span class="stack-pill">Scikit-learn</span>
+            <span class="stack-pill">AWS S3</span>
+            <span class="stack-pill">AWS Glue</span>
+            <span class="stack-pill">AWS SageMaker</span>
+            <span class="stack-pill">Pandas</span>
+            <span class="stack-pill">Seaborn</span>
+            <span class="in-progress-badge">In Progress</span>
+          </div>
+        </div>
+
         <div class="project-card">
           <div class="project-tag">Machine Learning · Sports Analytics</div>
           <div class="project-title">NBA Game Outcome Prediction Model</div>
@@ -578,6 +618,7 @@
             View on GitHub
           </a>
         </div>
+
         <div class="project-card">
           <div class="project-tag">Time Series · Trade Policy</div>
           <div class="project-title">U.S. Tariff Share Time Series Analysis</div>
@@ -593,6 +634,7 @@
             View on GitHub
           </a>
         </div>
+
         <div class="project-card">
           <div class="project-tag">Machine Learning · Healthcare Analytics</div>
           <div class="project-title">Predicting Healthcare Expenditures</div>
@@ -609,6 +651,7 @@
             View on GitHub
           </a>
         </div>
+
       </div>
     </div>
 
